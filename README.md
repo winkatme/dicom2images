@@ -1,5 +1,5 @@
 # dicom2images
-Convert a DICOM file that contains multiple images to single jpg/ping/tif images, and save them in a folder.
+Convert a DICOM file that contains multiple images to single jpg/png/tif images, and save them in a folder.
 
 Most DICOM files contain multiple images in one file.  This code converts the DICOM images into individual image files.
 
