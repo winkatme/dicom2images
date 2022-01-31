@@ -11,7 +11,7 @@ location = 'C:\My Downloads\DICOM_Files'
 # Enter the file name of the DICOM file:
 Dicom_file = 'Jane_Doe_Brain_MRI_DICOM.dcm'
 
-# Type of image to save as:  .tif, .jpg, .png,...
+# Type of image to save as:  tif, jpg, png,...
 Image_Type = 'tif'
 
 
