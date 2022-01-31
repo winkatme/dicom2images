@@ -32,6 +32,4 @@ for i in range(0,len(scaled_image[:])):
     img = Image.fromarray(scaled_image_copy)
     img = img.convert(mode='L')   # For some reason I had to convert it to 8-bit mode L for gaussian to work (Modes: https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes)
     img = img.filter(ImageFilter.GaussianBlur(radius=0.6))
-    
     img.save(f'Images\image_{image_number}.{Image_Type}')
-
