@@ -6,3 +6,5 @@ Most DICOM files contain multiple images in one file.  This code converts the DI
 Manually enter the folder, DICOM file name, and optionally, the type of image you want to convert to.
 
 Note that some Gaussian Blur is applied to make the image a little easier on the eyes.  
+
+Based on code from this source: https://pycad.co/how-to-convert-a-dicom-image-into-jpg-or-png/
