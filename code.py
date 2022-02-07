@@ -14,6 +14,11 @@ Dicom_file = 'Jane_Doe_Brain_MRI_DICOM.dcm'
 # Type of image to save as:  tif, jpg, png,...
 Image_Type = 'tif'
 
+# Rotate 180 degrees?  1=yes, 0 = no
+Rotate_180 = 1
+
+# Name
+Name = 'Patient'
 
 
 # Set directory where DICOM file is located
@@ -25,7 +30,7 @@ new_image = ds.pixel_array.astype(float)
 scaled_image = (np.maximum(new_image, 0) / new_image.max()) * 255
 
 # Iterate conversion to image type, Save in folder \Images
-# Note: It appears that the images need to be manually converted to 8-bit in order for the Gaussian blur to work correctly
+# Note: It appears that the images need to be manually converted to 8-bit (Mode='L') for the Gaussian blur to work correctly.
 # Other modes: https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes
 os.makedirs('Images', exist_ok=True)
 for i in range(0,len(scaled_image[:])):
@@ -34,4 +39,6 @@ for i in range(0,len(scaled_image[:])):
     img = Image.fromarray(scaled_image_copy)
     img = img.convert(mode='L')
     img = img.filter(ImageFilter.GaussianBlur(radius=0.6))
-    img.save(f'Images\image_{image_number}.{Image_Type}')
+    if Rotate_180 == 1:    
+        img = img.rotate(180)
+    img.save(f'Images\{Name}_{image_number}.{Image_Type}')
