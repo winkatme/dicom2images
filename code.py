@@ -20,6 +20,10 @@ Rotate_180 = 1
 # Name
 Name = 'Patient'
 
+# Size: enter a tuple, ie - (512, 512).  For default value, enter 'default' with quotes.
+size = 'default'
+
+
 
 # Set directory where DICOM file is located
 os.chdir(location)
@@ -41,4 +45,6 @@ for i in range(0,len(scaled_image[:])):
     img = img.filter(ImageFilter.GaussianBlur(radius=0.6))
     if Rotate_180 == 1:    
         img = img.rotate(180)
+    if size != 'default':
+        img = img.resize(size)
     img.save(f'Images\{Name}_{image_number}.{Image_Type}')
