@@ -21,7 +21,7 @@ Rotate_180 = 1
 Name = 'Patient'
 
 # Size: enter a tuple, ie - (512, 512).  For default value, enter 'default' with quotes.
-size = 'default'
+Size = 'default'
 
 
 
@@ -45,6 +45,6 @@ for i in range(0,len(scaled_image[:])):
     img = img.filter(ImageFilter.GaussianBlur(radius=0.6))
     if Rotate_180 == 1:    
         img = img.rotate(180)
-    if size != 'default':
-        img = img.resize(size)
+    if Size != 'default':
+        img = img.resize(Size)
     img.save(f'Images\{Name}_{image_number}.{Image_Type}')
