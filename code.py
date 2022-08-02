@@ -1,15 +1,17 @@
 import pydicom
 import numpy as np
-from PIL import Image, ImageFilter
 import os
+# Note: Pillow version 9.2.0 is required
+from PIL import Image, ImageFilter
+
 
 # Manually change these variables:
 
 # Enter the folder that contains the DICOM file to convert:
-location = 'C:\My Downloads\DICOM_Files'
+location = 'C:\My Documents\Dicom_Files'
 
 # Enter the file name of the DICOM file:
-Dicom_file = 'Jane_Doe_Brain_MRI_DICOM.dcm'
+Dicom_file = 'AB33M3.dcm'
 
 # Type of image to save as:  tif, jpg, png,...
 Image_Type = 'tif'
@@ -17,15 +19,22 @@ Image_Type = 'tif'
 # Rotate 180 degrees?  1=yes, 0 = no
 Rotate_180 = 1
 
+# FLip left to right?  1=yes, 0=no
+flip_L_to_R = 1
+
+
+'''
+___________________________________________
+'''
+
 # Name
-Name = 'Patient'
+Name = Dicom_file.split('.')
+Name = Name[0]
 
-# Size: enter a tuple, ie - (512, 512).  For default value, enter 'default' with quotes.
-Size = 'default'
+# Size: enter a tuple, ie - (512, 512).  For default value, enter 'default' with quotes
+size = (512, 512)
 
-
-
-# Set directory where DICOM file is located
+# Sets directory where DICOM file is located
 os.chdir(location)
 
 # Read DICOM file and scale image pixel values
@@ -43,8 +52,10 @@ for i in range(0,len(scaled_image[:])):
     img = Image.fromarray(scaled_image_copy)
     img = img.convert(mode='L')
     img = img.filter(ImageFilter.GaussianBlur(radius=0.6))
+    if flip_L_to_R == 1:
+        img = img.transpose(method=Image.Transpose.FLIP_LEFT_RIGHT)
     if Rotate_180 == 1:    
         img = img.rotate(180)
-    if Size != 'default':
-        img = img.resize(Size)
+    if size != 'default':
+        img = img.resize(size)
     img.save(f'Images\{Name}_{image_number}.{Image_Type}')
